@@ -16,6 +16,7 @@ We recommend using the npmjs package in order to receive updates/fixes.
 | appInfo       | name, version, flags, etc   | ---------------                |
 | deviceInfo       | fw and mcu version, id, etc   | Only available in dashboard             |
 | sign       | signed message   | path  + transaction type +  message                    |
+| sign       | signed message   | path  + transaction type +  message                    |
 
 
 getAddress command requires that you set the derivation path (account, change, index) and has an option parameter to display the address on the device. By default, it will retrieve the information without user confirmation.
