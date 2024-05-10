@@ -3,10 +3,10 @@ prompt = no
 distinguished_name = req_distinguished_name
 
 [ req_distinguished_name ]
-C = CH
+C = FR
 ST = TestState
 L = TestLocality
-O = Zondax
+O = Blooo
 OU = Development
-CN = Zondax
-emailAddress = info@zondax.ch
+CN = Blooo
+emailAddress = ledger@blooo.io

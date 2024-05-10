@@ -1,5 +1,5 @@
 /** ******************************************************************************
- *  (c) 2018 - 2023 Zondax AG
+ *  (c) 2018 - 2022 Zondax AG
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 export const CLA = 0x55
 export const CHUNK_SIZE = 250
-export const APP_KEY = 'CSM'
 
 export const INS = {
   GET_VERSION: 0x00,
@@ -38,7 +37,6 @@ export const P1_VALUES = {
 
 export const P2_VALUES = {
   JSON: 0x0,
-  TEXTUAL: 0x1,
 }
 
 export const ERROR_CODE = {

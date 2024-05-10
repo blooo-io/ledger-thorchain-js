@@ -1,26 +1,26 @@
 {
-  "name": "@zondax/ledger-cosmos-js",
-  "author": "Zondax AG",
+  "name": "@blooo-io/ledger-thorchain-js",
+  "author": "Blooo",
   "license": "Apache-2.0",
-  "version": "3.0.3",
-  "description": "Node API for Cosmos App (Ledger Nano S/S+/X)",
+  "version": "1.0.0",
+  "description": "Node API for THORChain App (Ledger Nano S/S+/X)",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cosmos/ledger-cosmos-js.git"
+    "url": "git+https://github.com/blooo-io/ledger-thorchain-js.git"
   },
   "keywords": [
     "Ledger",
     "Typescript",
     "Tendermint",
-    "Cosmos"
+    "THORChain"
   ],
   "bugs": {
-    "url": "https://github.com/cosmos/ledger-cosmos-js/issues"
+    "url": "https://github.com/blooo-io/ledger-thorchain-js/issues"
   },
-  "homepage": "https://github.com/cosmos/ledger-cosmos-js",
+  "homepage": "https://github.com/blooo-io/ledger-thorchain-js",
   "resolutions": {
     "@ledgerhq/hw-transport": "6.27.1",
     "@ledgerhq/devices": "6.27.1",
@@ -40,7 +40,7 @@
     "ripemd160": "^2.0.2",
     "stream-browserify": "^3.0.0",
     "vue": "^2.7.7",
-    "vue-template-compiler": "^2.7.10"
+    "vue-template-compiler": "^2.7.16"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.10",
@@ -62,7 +62,7 @@
     "bip39": "3.0.2",
     "copyfiles": "^2.4.1",
     "core-js": "^3.15.2",
-    "crypto-js": "4.1.1",
+    "crypto-js": "4.2.0",
     "eslint": "^8.22.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
@@ -75,7 +75,7 @@
     "ts-jest": "26",
     "ts-node": "^10.8.1",
     "typescript": "^4.7.4",
-    "webpack": "^5.74.0"
+    "webpack": "^5.91.0"
   },
   "moduleDirectories": [
     "node_modules",

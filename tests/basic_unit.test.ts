@@ -1,5 +1,5 @@
 /** ******************************************************************************
- *  (c) 2018 - 2023 Zondax AG
+ *  (c) 2018 - 2022 Zondax AG
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
  *  limitations under the License.
  ******************************************************************************* */
 
-import { CosmosApp } from '../src/cosmosApp'
+import { ThorchainApp } from '../src/thorchainApp'
 
 describe('UnitTest', function () {
   test('check address conversion', async () => {
     const pkStr = '034fef9cd7c4c63588d3b03feb5281b9d232cba34d6f3d71aee59211ffbfe1fe87'
     const pk = Buffer.from(pkStr, 'hex')
-    const addr = CosmosApp.getBech32FromPK('cosmos', pk)
-    expect(addr).toEqual('cosmos1w34k53py5v5xyluazqpq65agyajavep2rflq6h')
-  })
+    const addr = ThorchainApp.getBech32FromPK('thor', pk)
+    expect(addr).toEqual('thor1w34k53py5v5xyluazqpq65agyajavep29wxm0g')
+  });
 })

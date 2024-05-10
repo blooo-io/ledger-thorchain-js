@@ -26,7 +26,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           registry-url: 'https://registry.npmjs.org'
-          scope: '@zondax'
+          scope: '@blooo-io'
       - run: mv README-npm.md README.md
       - name: Install yarn
         run: npm install -g yarn

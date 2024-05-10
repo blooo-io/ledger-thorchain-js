@@ -1,5 +1,5 @@
 /** ******************************************************************************
- *  (c) 2018 - 2023w Zondax AG
+ *  (c) 2018 - 2022 Zondax AG
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -19,11 +19,15 @@ import Transport from '@ledgerhq/hw-transport'
 import { publicKeyv1, serializePathv1, signSendChunkv1 } from './commandsV1'
 import { publicKeyv2, serializePathv2, signSendChunkv2 } from './commandsV2'
 
+import { listen } from "@ledgerhq/logs";
+
+listen((log) => console.log(log));
+
 const crypto = require('crypto')
 const bech32 = require('bech32')
 const Ripemd160 = require('ripemd160')
 
-export class CosmosApp {
+export class ThorchainApp {
   transport: Transport
   versionResponse?: any
 
@@ -71,19 +75,18 @@ export class CosmosApp {
     }
   }
 
-  async prepareChunks(path: number[], buffer: Buffer, hrp: string | undefined) {
+  async signGetChunks(path: number[], buffer: Buffer) {
     const serializedPath = await this.serializePath(path)
-    const firstChunk = hrp === undefined ? serializedPath : Buffer.concat([serializedPath, CosmosApp.serializeHRP(hrp)])
 
     const chunks = []
-    chunks.push(firstChunk)
+    chunks.push(serializedPath)
 
     for (let i = 0; i < buffer.length; i += CHUNK_SIZE) {
       let end = i + CHUNK_SIZE
       if (i > buffer.length) {
         end = buffer.length
       }
-      chunks.push(buffer.subarray(i, end))
+      chunks.push(buffer.slice(i, end))
     }
 
     return chunks
@@ -202,7 +205,7 @@ export class CosmosApp {
         case 1:
           return publicKeyv1(this, serializedPath)
         case 2: {
-          const data = Buffer.concat([CosmosApp.serializeHRP('cosmos'), serializedPath])
+          const data = Buffer.concat([ThorchainApp.serializeHRP('thor'), serializedPath])
           return publicKeyv2(this, data)
         }
         default:
@@ -219,11 +222,9 @@ export class CosmosApp {
   async getAddressAndPubKey(path: number[], hrp: string, showInDevice = false) {
     return this.serializePath(path)
       .then((serializedPath: Buffer) => {
-        const data = Buffer.concat([CosmosApp.serializeHRP(hrp), serializedPath])
+        const data = Buffer.concat([ThorchainApp.serializeHRP(hrp), serializedPath])
         return this.transport
-          .send(CLA, INS.GET_ADDR_SECP256K1, showInDevice ? P1_VALUES.SHOW_ADDRESS_IN_DEVICE : P1_VALUES.ONLY_RETRIEVE, 0, data, [
-            ERROR_CODE.NoError,
-          ])
+          .send(CLA, INS.GET_ADDR_SECP256K1, showInDevice ? P1_VALUES.SHOW_ADDRESS_IN_DEVICE : P1_VALUES.ONLY_RETRIEVE, 0, data, [ERROR_CODE.NoError])
           .then((response: any) => {
             const errorCodeData = response.slice(-2)
             const returnCode = errorCodeData[0] * 256 + errorCodeData[1]
@@ -260,8 +261,8 @@ export class CosmosApp {
     }
   }
 
-  async sign(path: number[], buffer: Buffer, hrp: string | undefined, txType = P2_VALUES.JSON) {
-    return this.prepareChunks(path, buffer, hrp).then(chunks => {
+  async sign(path: number[], buffer: Buffer, txType = P2_VALUES.JSON) {
+    return this.signGetChunks(path, buffer).then(chunks => {
       return this.signSendChunk(1, chunks.length, chunks[0], txType).then(async response => {
         let result = {
           return_code: response.return_code,
