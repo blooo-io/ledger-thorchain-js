@@ -2,7 +2,7 @@
   "name": "@blooo/ledger-thorchain-js",
   "author": "Blooo",
   "license": "Apache-2.0",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Node API for THORChain App (Ledger Nano S/S+/X)",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
