@@ -1,4 +1,4 @@
-# @blooo-io/ledger-thorchain-js
+# @blooo/ledger-thorchain-js
 
 This package provides a basic client library to communicate with the THORchain App running in a Ledger Nano S/S+/X devices
 
